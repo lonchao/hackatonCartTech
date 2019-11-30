@@ -2,7 +2,7 @@ const fs = require('fs');
 var path = require('path');
 const tesseract = require('node-tesseract-ocr');
 const { document } = require('../models');
-const serviceMatricula = require('../services/getMatriculaService');
+const getMatriculaService = require('../services/getMatriculaService');
 class ReaderController {
   async read(filename) {
     const ext = path.extname(filename);
@@ -13,14 +13,15 @@ class ReaderController {
       console.log('1 - ' + filename + ' - added.');
 
       const result = await tesseract.recognize(filename, {
-        lang: 'eng',
+        lang: 'por',
         oem: 1,
         psm: 3,
       });
       // console.log(document);
-      const matricula = serviceMatricula.run(result);
+      const matriculaRes = getMatriculaService.run(result);
+      console.log(matriculaRes);
       document.create({
-        matricula: matricula,
+        matricula: matriculaRes,
         nome_arquivo: filename,
         conteudo: result,
       });
