@@ -15,7 +15,7 @@ class ReaderController {
       const result = await tesseract.recognize(filename, {
         lang: 'por',
         oem: 1,
-        psm: 3,
+        psm: 11,
       });
       // console.log(document);
       const matriculaRes = getMatriculaService.run(result);
