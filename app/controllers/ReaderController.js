@@ -1,7 +1,7 @@
 const fs = require('fs');
 var path = require('path');
 const tesseract = require('node-tesseract-ocr');
-const { Document } = require('../models');
+const { document } = require('../models');
 class ReaderController {
   async read(filename) {
     const ext = path.extname(filename);
@@ -13,8 +13,8 @@ class ReaderController {
       //   oem: 1,
       //   psm: 3,
       // });
-      // console.log(result);
-      Document.create({
+      console.log(document);
+      document.create({
         matricula: '1',
         nome_arquivo: filename,
         conteudo: '',
