@@ -8,16 +8,16 @@ class ReaderController {
     if (fs.existsSync(filename) && ext === '.tif') {
       console.log('1 - ' + filename + ' - added.');
 
-      // const result = await tesseract.recognize(filename, {
-      //   lang: 'eng',
-      //   oem: 1,
-      //   psm: 3,
-      // });
-      console.log(document);
+      const result = await tesseract.recognize(filename, {
+        lang: 'eng',
+        oem: 1,
+        psm: 3,
+      });
+      // console.log(document);
       document.create({
         matricula: '1',
         nome_arquivo: filename,
-        conteudo: '',
+        conteudo: result,
       });
     }
     console.log('####');
