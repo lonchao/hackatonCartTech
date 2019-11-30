@@ -3,6 +3,7 @@ var path = require('path');
 const tesseract = require('node-tesseract-ocr');
 const { document } = require('../models');
 const serviceMatricula = require('../services/getMatriculaService');
+const getNomeService = require('../services/getNomeService');
 class ReaderController {
   async read(filename) {
     const ext = path.extname(filename);
@@ -14,13 +15,14 @@ class ReaderController {
         oem: 1,
         psm: 3,
       });
+      getNomeService.run(result);
       // console.log(document);
-      const matricula = serviceMatricula.run(result);
-      document.create({
-        matricula: matricula,
-        nome_arquivo: filename,
-        conteudo: result,
-      });
+      // const matricula = serviceMatricula.run(result);
+      // document.create({
+      //   matricula: matricula,
+      //   nome_arquivo: filename,
+      //   conteudo: result,
+      // });
     }
     console.log('####');
     // const { folder } = req.body;
