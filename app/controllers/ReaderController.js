@@ -5,6 +5,11 @@ const { document } = require('../models');
 const getNomeService = require('../services/getNomeService');
 const getMatriculaService = require('../services/getMatriculaService');
 class ReaderController {
+  async readAll(arrAll) {
+    for (let i = 0; i < arrAll.length; i++) {
+      console.log(await this.read('./tmp/' + arrAll[i]));
+    }
+  }
   async read(filename) {
     const ext = path.extname(filename);
     if (
@@ -25,7 +30,7 @@ class ReaderController {
       document.create({
         matricula: matriculaRes,
         nome_arquivo: filename,
-        conteudo: result,
+        conteudo: result.trim(),
       });
     }
     console.log('####');
@@ -34,7 +39,7 @@ class ReaderController {
     //   return res.status(400).json({ error: 'User alredy exists' });
     // }
     // const user = await User.create(req.body);
-    // return res.json({ status: 'success' });
+    return 'ENDED - ' + filename;
   }
 }
 //   async read(req, res) {
