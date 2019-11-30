@@ -6,7 +6,10 @@ const serviceMatricula = require('../services/getMatriculaService');
 class ReaderController {
   async read(filename) {
     const ext = path.extname(filename);
-    if (fs.existsSync(filename) && ext === '.tif') {
+    if (
+      fs.existsSync(filename) &&
+      (ext.toLowerCase() === '.tif' || ext.toLowerCase() === '.pdf')
+    ) {
       console.log('1 - ' + filename + ' - added.');
 
       const result = await tesseract.recognize(filename, {
