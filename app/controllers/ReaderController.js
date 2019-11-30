@@ -2,6 +2,7 @@ const fs = require('fs');
 var path = require('path');
 const tesseract = require('node-tesseract-ocr');
 const { document } = require('../models');
+const serviceMatricula = require('../services/getMatriculaService');
 class ReaderController {
   async read(filename) {
     const ext = path.extname(filename);
@@ -14,8 +15,9 @@ class ReaderController {
         psm: 3,
       });
       // console.log(document);
+      const matricula = serviceMatricula.run(result);
       document.create({
-        matricula: '1',
+        matricula: matricula,
         nome_arquivo: filename,
         conteudo: result,
       });
