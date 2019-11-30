@@ -21,16 +21,22 @@ class ReaderController {
       const result = await tesseract.recognize(filename, {
         lang: 'por',
         oem: 1,
-        psm: 3,
+        psm: 12,
       });
       getNomeService.run(result);
       // console.log(document);
       const matriculaRes = await getMatriculaService.run(filename, result);
-
+      const confiavel = filename.indexOf(matriculaRes) > -1 ? 100 : 0;
+      const tipo =
+        result.toLowerCase().indexOf('compra e venda') > -1
+          ? 'Compra e Venda'
+          : '';
       document.create({
         matricula: matriculaRes,
         nome_arquivo: filename,
         conteudo: result.trim(),
+        tipo: tipo,
+        confiavel: confiavel,
       });
     }
     console.log('####');

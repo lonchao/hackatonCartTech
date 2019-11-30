@@ -3,6 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     matricula: DataTypes.STRING,
     nome_arquivo: DataTypes.STRING,
     conteudo: DataTypes.STRING,
+    tipo: DataTypes.STRING,
+    confiavel: DataTypes.INTEGER,
   });
 
   return document;
