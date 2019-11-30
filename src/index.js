@@ -3,6 +3,8 @@ var app = express();
 var fs = require('fs');
 const readerController = require('./controllers/ReaderController');
 
+app.use(express.static('public'));
+
 fs.watch('./tmp', {}, (eventType, filename) => {
   if (filename) {
     readerController.read('./tmp/' + filename);
