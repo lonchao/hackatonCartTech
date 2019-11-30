@@ -2,6 +2,7 @@ const fs = require('fs');
 var path = require('path');
 const tesseract = require('node-tesseract-ocr');
 const { document } = require('../models');
+const getNomeService = require('../services/getNomeService');
 const getMatriculaService = require('../services/getMatriculaService');
 class ReaderController {
   async read(filename) {
@@ -17,6 +18,7 @@ class ReaderController {
         oem: 1,
         psm: 11,
       });
+      getNomeService.run(result);
       // console.log(document);
       const matriculaRes = getMatriculaService.run(result);
       console.log(matriculaRes);
