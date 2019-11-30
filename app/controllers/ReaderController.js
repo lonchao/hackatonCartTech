@@ -16,12 +16,12 @@ class ReaderController {
       const result = await tesseract.recognize(filename, {
         lang: 'por',
         oem: 1,
-        psm: 11,
+        psm: 3,
       });
       getNomeService.run(result);
       // console.log(document);
-      const matriculaRes = getMatriculaService.run(result);
-      console.log(matriculaRes);
+      const matriculaRes = await getMatriculaService.run(filename, result);
+
       document.create({
         matricula: matriculaRes,
         nome_arquivo: filename,
