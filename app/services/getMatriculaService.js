@@ -1,5 +1,5 @@
 class getMatriculaService {
-  async run(conteudo) {
+  run(conteudo) {
     console.log('getMatriculaService');
     return 'matricula';
   }

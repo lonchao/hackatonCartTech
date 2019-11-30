@@ -2,27 +2,31 @@ const fs = require('fs');
 var path = require('path');
 const tesseract = require('node-tesseract-ocr');
 const { document } = require('../models');
-const serviceMatricula = require('../services/getMatriculaService');
 const getNomeService = require('../services/getNomeService');
+const getMatriculaService = require('../services/getMatriculaService');
 class ReaderController {
   async read(filename) {
     const ext = path.extname(filename);
-    if (fs.existsSync(filename) && ext === '.tif') {
+    if (
+      fs.existsSync(filename) &&
+      (ext.toLowerCase() === '.tif' || ext.toLowerCase() === '.pdf')
+    ) {
       console.log('1 - ' + filename + ' - added.');
 
       const result = await tesseract.recognize(filename, {
-        lang: 'eng',
+        lang: 'por',
         oem: 1,
         psm: 3,
       });
       getNomeService.run(result);
       // console.log(document);
-      // const matricula = serviceMatricula.run(result);
-      // document.create({
-      //   matricula: matricula,
-      //   nome_arquivo: filename,
-      //   conteudo: result,
-      // });
+      const matriculaRes = getMatriculaService.run(result);
+      console.log(matriculaRes);
+      document.create({
+        matricula: matriculaRes,
+        nome_arquivo: filename,
+        conteudo: result,
+      });
     }
     console.log('####');
     // const { folder } = req.body;
