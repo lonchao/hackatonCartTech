@@ -1,19 +1,24 @@
 const fs = require('fs');
 var path = require('path');
 const tesseract = require('node-tesseract-ocr');
-
+const { Document } = require('../models');
 class ReaderController {
   async read(filename) {
     const ext = path.extname(filename);
     if (fs.existsSync(filename) && ext === '.tif') {
       console.log('1 - ' + filename + ' - added.');
 
-      const result = await tesseract.recognize(filename, {
-        lang: 'eng',
-        oem: 1,
-        psm: 3,
+      // const result = await tesseract.recognize(filename, {
+      //   lang: 'eng',
+      //   oem: 1,
+      //   psm: 3,
+      // });
+      // console.log(result);
+      Document.create({
+        matricula: '1',
+        nome_arquivo: filename,
+        conteudo: '',
       });
-      console.log(result);
     }
     console.log('####');
     // const { folder } = req.body;
