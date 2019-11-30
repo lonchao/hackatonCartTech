@@ -1,7 +1,15 @@
 var express = require('express');
 var app = express();
-
+var fs = require('fs');
 const readerController = require('./controllers/ReaderController');
+
+app.use(express.static('public'));
+
+fs.watch('./tmp', {}, (eventType, filename) => {
+  if (filename) {
+    readerController.read('./tmp/' + filename);
+  }
+});
 
 app.get('/', function(req, res) {
   res.send('CartTech 0.1!');
