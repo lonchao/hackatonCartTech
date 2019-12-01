@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     nome_arquivo: DataTypes.STRING,
     conteudo: DataTypes.STRING,
     tipo: DataTypes.STRING,
+    nome: DataTypes.STRING,
     confiavel: DataTypes.INTEGER,
   });
 

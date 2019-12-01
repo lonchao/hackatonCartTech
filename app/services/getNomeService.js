@@ -22,7 +22,7 @@ class getNomeService {
     if (name.length === 1) {
       name = data.slice(indexName).split(':');
     }
-    console.log('name', name[1]);
+    // console.log('name', name[1]);
 
     const readNamePromise = (...args) => {
       return new Promise((resolve, reject) => {
@@ -41,7 +41,7 @@ class getNomeService {
     const { person } = arrNames.entities;
 
     const formatString = dado => {
-      console.log('dados', dado);
+      // console.log('dados', dado);
       const ret = dado
         .normalize('NFD')
         .replace(

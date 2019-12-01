@@ -1,102 +1,68 @@
+<html>
 <head>
-  <title>Consulta de Dados</title>
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-  />
-  <link rel="stylesheet" href="style.css" />
+	<title>Consulta de Dados</title>
+	<link
+	rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	/>
+	<link rel="stylesheet" href="style.css" />
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-  <header class="py-3">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-8 m-0">
-          <h5 class="text-white m-0">Consulta de Dados</h5>
-        </div>
-        <div class="col-4 text-right">
-          <span class="text-white">Cartorário</span>
-        </div>
-      </div>
-    </div>
-  </header>
-  <div classa="">
-    <div class="container-fluid">
-      <div class="row py-5">
-        <div class="col-9">
-          <div class="row">
-            <div class="col-8">
-              <h5>
-                Foram encontrados 2 registros para
-                <span class="text-primary">Low Way Chao</span>
-              </h5>
-            </div>
-            <div class="col-4 text-right">
-              <button class="btn btn-primary">Exportar todos</button>
-            </div>
-          </div>
-        </div>
+	<header class="py-3">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-8 m-0">
+					<h5 class="text-white m-0">Consulta de Dados</h5>
+				</div>
+				<div class="col-4 text-right">
+					<span class="text-white">Cartorário</span>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div classa="">
+		<div class="container-fluid">
+			<div class="row py-5">
+				<div class="col-9">
+					<div class="row d-none" id="header-text">
+						<div class="col-8">
+							<h5>
+								Foram encontrados <span id="total"></span> registro(s)<!--  para -->
+								<!-- <span class="text-primary">Low Way Chao</span> -->
+							</h5>
+						</div>
+						<div class="col-4 text-right">
+							
 
-        <div class="col-9">
-          <div class="card border-0 mt-2">
-            <div class="card-body py-4">
-              <div class="row">
-                <div class="col-6">
-                  <h4 class="font-weight-bold mb-0">
-                    Matrícula <span class="text-primary">9.159</span>
-                  </h4>
-                </div>
-                <div class="col-6 text-right mb-0">
-                  <p>
-                    Rua Jucelino Kubitheck, 321 - Curitiba - PR
-                  </p>
-                </div>
-              </div>
-              <hr class="my-2" />
-              <div class="row">
-                <div class="col-12 mt-2">
-                  <p class="font-weight-bold mb-2">
-                    Ato 1º - <span class="">Compra - Venda</span>
-                  </p>
-                  <ul>
-                    <li>Lon Way Chao - Adquirente</li>
-                    <li>Fernando Henrique Martins - Transmitente</li>
-                  </ul>
-                </div>
-                <div class="col-12 mt-3">
-                  <p class="font-weight-bold mb-2">
-                    Ato 2º - <span class="">Compra - Venda</span>
-                  </p>
-                  <ul>
-                    <li>Lon Way Chao - Transmitente</li>
-                    <li>Guilherme Randuz do Rosário - Transmitente</li>
-                  </ul>
-                </div>
-                <div class="col-12 mt-3">
-                  <p class="font-weight-bold mb-2">
-                    Ato 3º - <span class="">Alienação - Fiduciária</span>
-                  </p>
-                  <ul>
-                    <li>Caixa Econômica Federal - Devendor</li>
-                    <li>Guilherme Randuz do Rosário - Devendor</li>
-                  </ul>
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col-12 text-right">
-                  <button class="btn btn-primary">
-                    Exportar Matrícula
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card border-0 mt-2">
+							<div class="dropdown">
+								<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Exportar todos
+								</a>
+
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<a class="dropdown-item" target="_blank" href="/export/json">JSON</a>
+									<a class="dropdown-item" target="_blank" href="/export/csv">CSV</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-9" id="list-items">
+					<div class="loading-true d-flex justify-content-center">
+
+						<div class="spinner-grow text-primary" style="width: 10rem; height: 10rem;" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					</div>
+
+          <!--<div class="card border-0 mt-2">
             <div class="card-body py-4">
               <div class="row">
                 <div class="col-6">
@@ -149,77 +115,206 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="filtro card border-0 mt-2">
-            <div class="card-body py-4">
-              <h5 class="mb-0">Filtrar informações</h5>
-              <form class="mt-3">
-                <div class="form-group mb-1">
-                  <label for="">Matrícula</label>
-                  <input type="text" class="form-control" id="" />
-                </div>
-                <div class="form-group mb-1">
-                  <label for="">Nome</label>
-                  <input type="text" class="form-control" id="" />
-                </div>
-                <div class="form-group mb-1">
-                  <label for="">Documento</label>
-                  <input type="text" class="form-control" id="" />
-                </div>
-                <div class="form-group mb-1">
-                  <label for="">Palavra chave</label>
-                  <input type="text" class="form-control" id="" />
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-primary mt-2 px-4"
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                >
-                  Filtrar
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+        </div>-->
     </div>
-  </div>
+    <div class="col-3">
+    	<div class="filtro card border-0 mt-2">
+    		<div class="card-body py-4">
+    			<h5 class="mb-0">Filtrar informações</h5>
+    			<form class="mt-3">
+    				<div class="form-group mb-1">
+    					<label for="">Matrícula</label>
+    					<input type="text" class="form-control" id="filter-matricula" />
+    				</div>
+    				<div class="form-group mb-1">
+    					<label for="">Nome</label>
+    					<input type="text" class="form-control" id="filter-nome" />
+    				</div>
+    				<div class="form-group mb-1">
+    					<label for="">Documento</label>
+    					<input type="text" class="form-control" id="filter-documento" />
+    				</div>
+    				<div class="form-group mb-1">
+    					<label for="">Palavra chave</label>
+    					<input type="text" class="form-control" id="filter-palavra" />
+    				</div>
+    				<button
+    				type="button"
+    				class="btn btn-primary mt-2 px-4"
+    				onClick="getAll()"
+    				>
+    				Filtrar
+    			</button>
+    		</form>
+    	</div>
+    </div>
+</div>
+</div>
+</div>
+</div>
 
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Exportar</h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">
-            Fechar
-          </button>
-          <button type="button" class="btn btn-success">Fazer download</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Modal -->
+<div
+class="modal fade"
+id="exampleModal"
+tabindex="-1"
+role="dialog"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Exportar</h5>
+			<button
+			type="button"
+			class="close"
+			data-dismiss="modal"
+			aria-label="Close"
+			>
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		...
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-danger" data-dismiss="modal">
+			Fechar
+		</button>
+		<button type="button" class="btn btn-success">Fazer download</button>
+	</div>
+</div>
+</div>
+</div>
 </body>
+
+<script type="text/javascript">
+	var BASE_URL = 'http://localhost:3000/';
+	var call=0;
+	function getAll(){
+		call++;
+		let params='token='+call;
+
+		if($('#filter-matricula').val().trim()!== ''){
+			params+= '&matricula='+$('#filter-matricula').val();			
+		}
+		if($('#filter-nome').val().trim()!== ''){
+			params+= '&nome='+$('#filter-nome').val();			
+		}
+		if($('#filter-documento').val().trim()!== ''){
+			params+= '&documento='+$('#filter-documento').val();			
+		}
+		if($('#filter-palavra').val().trim()!== ''){
+			params+= '&palavra='+$('#filter-palavra').val();			
+		}
+
+		$('#list-items').html('<div class="loading-true d-flex justify-content-center"><div class="spinner-grow text-primary" style="width: 10rem; height: 10rem;" role="status"><span class="sr-only">Loading...</span></div></div>');
+
+		$.get(BASE_URL+'documents?'+params,function (data){
+			console.log(data)
+			$('#list-items').html('');
+			$('#header-text').removeClass('d-none');
+			$('#total').html(data.items.length);
+
+			for(var i = 0 ; i < data.items.length ; i ++){
+				colocaItem(data.items[i])
+			}
+		})
+	}
+
+	getAll();
+
+
+	function colocaItem(item){
+
+
+		var matricula = number_format(item.matricula,0,'','.');
+
+		var strAtos = '';
+		var tipos = item.tipo ? item.tipo.split(',') : '';
+		for(var x = 0; x < tipos.length; x ++ ){
+			const strNome = item.nome.split(',');
+
+			strAtos += ` <div class="col-12 mt-2">
+			<p class="font-weight-bold mb-2">
+			Ato ${x+1}º - <span class="">${tipos[x].trim()}</span>
+			</p>
+			<ul>
+			${strNome.length > 0 && strNome[strNome.length-1].trim()!='' ? '<li>'+strNome[strNome.length-1]+'</li>' : ''}
+			
+			</ul>
+			</div>`;
+		}
+		var $item = $(`<div class="card border-0 mt-2">
+			<div class="card-body py-4">
+			<div class="row">
+			<div class="col-6">
+			<h4 class="font-weight-bold mb-0">
+			Matrícula <span class="text-primary">${matricula}</span>
+			</h4>
+			</div>
+			<div class="col-6 text-right mb-0">
+			<p>
+			Rua Jucelino Kubitheck, 321 - Curitiba - PR
+			</p>
+			</div>
+			</div>
+			<hr class="my-2" />
+			<div class="row">
+			${strAtos}               
+			</div>
+			<hr />
+			<div class="row">
+			<div class="col-12 text-right">
+			<a href="${BASE_URL}document/${item.id}" target="_blank" class="btn btn-primary">
+			Exportar Matrícula
+			</a>
+			</div>
+			</div>
+			</div>
+			</div>`);
+		$('#list-items').append($item);
+		
+	}
+
+
+
+
+	function number_format (number, decimals, decPoint, thousandsSep) { // eslint-disable-line camelcase
+
+
+		number = (number + '').replace(/[^0-9+\-Ee.]/g, '')
+		var n = !isFinite(+number) ? 0 : +number
+		var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
+		var sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep
+		var dec = (typeof decPoint === 'undefined') ? '.' : decPoint
+		var s = ''
+
+		var toFixedFix = function (n, prec) {
+			if (('' + n).indexOf('e') === -1) {
+				return +(Math.round(n + 'e+' + prec) + 'e-' + prec)
+			} else {
+				var arr = ('' + n).split('e')
+				var sig = ''
+				if (+arr[1] + prec > 0) {
+					sig = '+'
+				}
+				return (+(Math.round(+arr[0] + 'e' + sig + (+arr[1] + prec)) + 'e-' + prec)).toFixed(prec)
+			}
+		}
+
+  // @todo: for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec).toString() : '' + Math.round(n)).split('.')
+  if (s[0].length > 3) {
+  	s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep)
+  }
+  if ((s[1] || '').length < prec) {
+  	s[1] = s[1] || ''
+  	s[1] += new Array(prec - s[1].length + 1).join('0')
+  }
+
+  return s.join(dec)
+}
+</script>
+</html>
