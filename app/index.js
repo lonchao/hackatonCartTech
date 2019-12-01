@@ -5,8 +5,8 @@ const readerController = require('./controllers/ReaderController');
 
 app.use(express.static('public'));
 
-// const allFiles = fs.readdirSync('./tmp');
-// readerController.readAll(allFiles);
+const allFiles = fs.readdirSync('./tmp');
+readerController.readAll(allFiles);
 
 fs.watch('./tmp', {}, async (eventType, filename) => {
   if (filename) {

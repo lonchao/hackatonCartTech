@@ -4,6 +4,35 @@ const tesseract = require('node-tesseract-ocr');
 const { document } = require('../models');
 const getNomeService = require('../services/getNomeService');
 const getMatriculaService = require('../services/getMatriculaService');
+
+const tipos = [
+  'Abertura de Matrícula',
+  'Compra e Venda',
+  'Abertura com Enfiteuta',
+  'Abertura de Usucapião',
+  'Alienação Fiduciária',
+  'Área de Preservação Ambiental',
+  'Atribuição',
+  'Cadastro',
+  'Cancelamento de Ônus',
+  'Casamento Nome Conjuge',
+  'Casamento que Não Transmite',
+  'Compromisso de Compra e Venda',
+  'Construção',
+  'Dação em Pagamento',
+  'Divisão Amigável',
+  'Divórcio',
+  'Hipoteca Cedular Lv 02',
+  'Integralização de Capital Social',
+  'Logradouro',
+  'Partilha Herança',
+  'Regularização Fundiária',
+  'Restrições Urbanísticas',
+  'Retificação da Pessoa',
+  'Retificação Enfiteutica',
+  'Transporte de Hipoteca',
+  'Usucapião',
+];
 class ReaderController {
   async readAll(arrAll) {
     for (let i = 0; i < arrAll.length; i++) {
@@ -27,15 +56,35 @@ class ReaderController {
       // console.log(document);
       const matriculaRes = await getMatriculaService.run(filename, result);
       const confiavel = filename.indexOf(matriculaRes) > -1 ? 100 : 0;
-      const tipo =
-        result.toLowerCase().indexOf('compra e venda') > -1
-          ? 'Compra e Venda'
-          : '';
+
+      let resMaps = tipos.map(item => {
+        const pos = result.toLowerCase().indexOf(item.toLowerCase());
+        return pos > -1 ? { pos: pos, item: item } : null;
+      });
+      resMaps = resMaps.filter(item => {
+        return item;
+      });
+      resMaps = resMaps.filter((a, b) => {
+        if (a.pos < b.pos) {
+          return a;
+        } else {
+          return b;
+        }
+      });
+      let tipoStr = '';
+      resMaps.forEach((item, index) => {
+        if (index > 0) {
+          tipoStr += ', ';
+        }
+        tipoStr += item.item;
+      });
+      confiavel = tipoStr === '' ? confiavel - 10 : confiavel;
+      console.log(tipoStr);
       document.create({
         matricula: matriculaRes,
         nome_arquivo: filename,
         conteudo: result.trim(),
-        tipo: tipo,
+        tipo: tipoStr,
         confiavel: confiavel,
       });
     }
