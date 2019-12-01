@@ -55,7 +55,7 @@ class ReaderController {
       getNomeService.run(result);
       // console.log(document);
       const matriculaRes = await getMatriculaService.run(filename, result);
-      const confiavel = filename.indexOf(matriculaRes) > -1 ? 100 : 0;
+      let confiavel = filename.indexOf(matriculaRes) > -1 ? 100 : 0;
 
       let resMaps = tipos.map(item => {
         const pos = result.toLowerCase().indexOf(item.toLowerCase());
