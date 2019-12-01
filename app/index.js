@@ -18,6 +18,16 @@ app.get('/', function(req, res) {
   res.send('CartTech 0.1!');
 });
 
+app.get('/documents', (req, res) => {
+  return readerController.list(req, res);
+}); //Listar todos
+app.get('/document/:id', (req, res) => {
+  return readerController.get(req, res);
+}); //Listar todos
+app.get('/export/:format', (req, res) => {
+  return readerController.export(req, res);
+}); //Listar todos
+
 app.get('/read', function(req, res) {
   return readerController.read(req, res);
 });

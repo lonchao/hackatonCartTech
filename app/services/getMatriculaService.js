@@ -41,8 +41,8 @@ class getMatriculaService {
       });
       // correctNumber = arrDoc[arrDoc.length - 1];
     }
-    console.log('correctNumber', correctNumber);
-    console.log('arrDoc', arrDoc);
+    // console.log('correctNumber', correctNumber);
+    // console.log('arrDoc', arrDoc);
     // console.log('getMatriculaService  - ' + arrDoc.length);
     // console.log('getMatriculaService2  - ' + arrDoc2.length);
     return correctNumber ? correctNumber.split('.').join('') : 0;
